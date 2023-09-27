@@ -1,0 +1,51 @@
+#include<iostream>
+using namespace std;
+void swap(int A[], int i, int j)
+{
+    int p;
+    p=A[i];
+    A[i]=A[j];
+    A[j]=p;
+}
+int partition(int A[], int L, int R)
+{
+    int pivot,i,j;
+    pivot=A[L];  
+    i=L;
+    j=R+1;
+    
+    while(i<j)
+    {
+        do{
+            i++;
+        } while(A[i]<pivot);
+        do{
+            j--;
+        } while(A[j]>pivot);
+        if(i<j)
+            swap(A, i, j);
+    }
+    swap(A, L, j);
+    return j;
+}
+void quicksort(int A[], int L, int R)
+{
+    int ploc;
+    if(L<R)
+    {
+        ploc = partition(A,L,R);
+        quicksort(A,L,ploc-1);
+        quicksort(A,ploc+1,R);
+    }
+}
+int main() 
+{
+ int arr[]={25,2,17,-4,91,76,34,21,28,19,31}, l=0, r,i;
+ r=sizeof(arr)/sizeof(arr[0])-1; 
+ quicksort(arr,l,r);
+ for (i=0;i<r;i++){
+     cout<<arr[i]<<" ";
+ }
+ return 0;
+}
+
